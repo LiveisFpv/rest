@@ -2,7 +2,6 @@ package com.project.rest.controllers;
 
 import com.project.rest.Deal;
 import com.project.rest.DealRequest;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
