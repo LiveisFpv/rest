@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ExchangesController {
     @RequestMapping("/exchanges")
-    public Exchanges greeting(){
-        return new Exchanges("Binance",
+    public Exchanges [] greeting(){
+        return new Exchanges[]{new Exchanges("Binance",
                 9,
                 364578658725.0,
                 67,
                 45 ,
-                new double[]{324,436,584,987,674});
+                new double[]{324,436,584,987,674})};
     }
 }
