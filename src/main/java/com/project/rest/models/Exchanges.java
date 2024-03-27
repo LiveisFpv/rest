@@ -1,11 +1,25 @@
-package com.project.rest;
+package com.project.rest.models;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "Exchanges")
 public class Exchanges {
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    @Column(name="name")
     private final String name;
+    @Column(name="score")
     private final double score;
+    @Column(name="volume24h")
     private final double volume24h;
+    @Column(name="markets")
     private final double markets;
+    @Column(name="coins")
     private final double coins;
+    @Column(name="last_volume")
     private final double last_volume[];
 
     public Exchanges(String name,double score,double volume24h,double markets,double coins, double last_volume[]){

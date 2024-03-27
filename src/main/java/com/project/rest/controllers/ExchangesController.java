@@ -1,6 +1,6 @@
 package com.project.rest.controllers;
 
-import com.project.rest.Exchanges;
+import com.project.rest.models.Exchanges;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

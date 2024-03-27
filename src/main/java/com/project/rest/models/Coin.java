@@ -1,10 +1,25 @@
-package com.project.rest;
+package com.project.rest.models;
+import jakarta.persistence.*;
 
+@Entity
+@Table(name = "Coin")
 public class Coin {
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    @ManyToOne
+    @JoinColumn(name="Coins_id")
+    private Portfolio Coins;
+    @Column(name="coin_name")
     private final String coin_name;
+    @Column(name="coin_code")
     private final String coin_code;
+    @Column(name="volume")
     private final double volume;
+    @Column(name="usd_price")
     private final double usd_price;
+    @Column(name="last_price")
     private final double last_price[];
     public Coin(String coin_name,String coin_code,double volume, double usd_price, double last_price[]){
         this.coin_name=coin_name;

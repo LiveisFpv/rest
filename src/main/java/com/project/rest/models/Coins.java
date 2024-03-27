@@ -1,16 +1,32 @@
-package com.project.rest;
+package com.project.rest.models;
 
-import java.lang.reflect.Array;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "Coins")
 public class Coins {
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    @Column(name="coin_name")
     private final String coin_name;
+    @Column(name="coin_code")
     private final String coin_code;
+    @Column(name="price")
     private final double price;
+    @Column(name="h1")
     private final double h1;
+    @Column(name="h24")
     private final double h24;
+    @Column(name="d7")
     private final double d7;
+    @Column(name="market_cap")
     private final double market_cap;
+    @Column(name="volume")
     private final double volume;
+    @Column(name="last_price")
     private final double last_price[];
     public Coins(String coin_name,String coin_code, double price,
                  double h1, double h24, double d7, double market_cap,

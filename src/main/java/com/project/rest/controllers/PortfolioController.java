@@ -1,8 +1,8 @@
 package com.project.rest.controllers;
 
-import com.project.rest.Coin;
-import com.project.rest.Deal;
-import com.project.rest.Portfolio;
+import com.project.rest.models.Coin;
+import com.project.rest.models.Deal;
+import com.project.rest.models.Portfolio;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

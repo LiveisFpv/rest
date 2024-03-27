@@ -1,6 +1,6 @@
 package com.project.rest.controllers;
 
-import com.project.rest.Trend;
+import com.project.rest.models.Trend;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

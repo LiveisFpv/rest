@@ -1,8 +1,19 @@
-package com.project.rest;
+package com.project.rest.models;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "Trend")
 public class Trend {
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    @Column(name = "coin_name")
     private final String coin_name;
+    @Column(name = "coin_code")
     private final String coin_code;
+    @Column(name = "h24")
     private final double h24;
     public Trend(String coin_name,String coin_code,double h24){
         this.coin_name=coin_name;

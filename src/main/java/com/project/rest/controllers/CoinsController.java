@@ -1,8 +1,6 @@
 package com.project.rest.controllers;
 
-import java.util.concurrent.atomic.AtomicLong;
-
-import com.project.rest.Coins;
+import com.project.rest.models.Coins;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
