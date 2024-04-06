@@ -11,11 +11,11 @@ public class Coin {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @JsonIgnore
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="portfolio_coin_id")
     @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id")
     @JsonIdentityReference(alwaysAsId=true) // Только ID будет сериализован
-    @JsonIgnore
     private Portfolio portfolio_coin;
     @Column(name="coin_name")
     private final String coin_name;

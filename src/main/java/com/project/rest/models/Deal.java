@@ -15,11 +15,11 @@ public class Deal {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @JsonIgnore
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="portfolio_id")
     @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id")
     @JsonIdentityReference(alwaysAsId=true) // Только ID будет сериализован
-    @JsonIgnore
     private Portfolio portfolio;
     @Column(name="date")
     private final String date;
