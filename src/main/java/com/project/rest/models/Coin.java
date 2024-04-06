@@ -1,4 +1,5 @@
 package com.project.rest.models;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -11,8 +12,11 @@ public class Coin {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="coin_id")
-    private Portfolio coins;
+    @JoinColumn(name="portfolio_coin_id")
+    @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id")
+    @JsonIdentityReference(alwaysAsId=true) // Только ID будет сериализован
+    @JsonIgnore
+    private Portfolio portfolio_coin;
     @Column(name="coin_name")
     private final String coin_name;
     @Column(name="coin_code")
@@ -36,12 +40,15 @@ public class Coin {
         return this.id;
     }
 
-    public Portfolio getCoins() {
-        return this.coins;
+    public Portfolio getPortfolio() {
+        return this.portfolio_coin;
     }
 
     public String getCoin_code() {
         return this.coin_code;
+    }
+    public void setPortfolio(Portfolio portfolio) {
+        this.portfolio_coin = portfolio;
     }
 
     public String getCoin_name() {

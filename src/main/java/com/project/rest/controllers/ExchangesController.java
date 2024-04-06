@@ -1,5 +1,6 @@
 package com.project.rest.controllers;
 
+import com.project.rest.models.Coins;
 import com.project.rest.models.Exchanges;
 import com.project.rest.models.Exchanges;
 import com.project.rest.repository.ExchangesRepository;
@@ -40,6 +41,16 @@ public class ExchangesController {
             return ResponseEntity.ok(savedExchanges);
         }
         else{
+            return ResponseEntity.notFound().build();
+        }
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteExchanges(@PathVariable Integer id) {
+        Optional<Exchanges> ExchangesOptional = exchangesRepository.findById(id);
+        if (ExchangesOptional.isPresent()) {
+            exchangesRepository.deleteById(id);
+            return ResponseEntity.noContent().build();
+        } else {
             return ResponseEntity.notFound().build();
         }
     }

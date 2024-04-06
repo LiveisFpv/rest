@@ -1,7 +1,11 @@
 package com.project.rest.models;
 
+import com.fasterxml.jackson.annotation.*;
+import com.project.rest.repository.PortfolioRepository;
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
+
+import java.util.Optional;
 
 @Entity
 @NoArgsConstructor(force = true)
@@ -12,8 +16,11 @@ public class Deal {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="deal_id")
-    private Portfolio deals;
+    @JoinColumn(name="portfolio_id")
+    @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id")
+    @JsonIdentityReference(alwaysAsId=true) // Только ID будет сериализован
+    @JsonIgnore
+    private Portfolio portfolio;
     @Column(name="date")
     private final String date;
     @Column(name="type")
@@ -26,7 +33,7 @@ public class Deal {
     private final String coin_name;
     @Column(name="coin_code")
     private final String coin_code;
-    public Deal(String date, String type, double price, double volume, String coin_name, String coin_code){
+    public Deal( String date, String type, double price, double volume, String coin_name, String coin_code){
         this.date=date;
         this.type=type;
         this.price=price;
@@ -34,13 +41,15 @@ public class Deal {
         this.coin_name=coin_name;
         this.coin_code=coin_code;
     }
-
     public Integer getId() {
         return this.id;
     }
 
-    public Portfolio getDeals() {
-        return this.deals;
+    public Portfolio getPortfolio() {
+        return this.portfolio;
+    }
+    public void setPortfolio(Portfolio portfolio) {
+        this.portfolio = portfolio;
     }
     public double getVolume() {
         return this.volume;

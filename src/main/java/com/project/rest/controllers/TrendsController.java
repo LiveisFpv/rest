@@ -44,4 +44,14 @@ public class TrendsController {
             return ResponseEntity.notFound().build();
         }
     }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteTrend(@PathVariable Integer id) {
+        Optional<Trend> TrendOptional = trendRepository.findById(id);
+        if (TrendOptional.isPresent()) {
+            trendRepository.deleteById(id);
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }

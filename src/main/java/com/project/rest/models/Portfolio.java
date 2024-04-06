@@ -1,9 +1,13 @@
 package com.project.rest.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.project.rest.models.Coin;
 import com.project.rest.models.Deal;
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Entity
 @NoArgsConstructor(force = true)
@@ -13,10 +17,12 @@ public class Portfolio {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @OneToMany(fetch=FetchType.LAZY,mappedBy = "coins", cascade = CascadeType.ALL)
-    private final Coin[] coins;
-    @OneToMany(fetch=FetchType.LAZY,mappedBy = "deals", cascade = CascadeType.ALL)
-    private final Deal[] deals;
+    @JsonManagedReference
+    @OneToMany(mappedBy = "portfolio_coin")
+    private final List<Coin> coins;
+    @JsonManagedReference
+    @OneToMany(mappedBy = "portfolio")
+    private final List<Deal> deals;
     @Column(name = "profile_volume_usd")
     private final double[] profile_volume_usd;
     @Column(name = "profile_volume_btc")
@@ -25,7 +31,7 @@ public class Portfolio {
     private final double current_volume_usd;
     @Column(name = "current_volume_btc")
     private final double current_volume_btc;
-    public Portfolio(Coin[] coins, Deal[] deals, double[] profile_volume_usd, double[] profile_volume_btc, double current_volume_usd, double current_volume_btc){
+    public Portfolio(List<Coin> coins, List<Deal> deals, double[] profile_volume_usd, double[] profile_volume_btc, double current_volume_usd, double current_volume_btc){
         this.coins=coins;
         this.deals=deals;
         this.profile_volume_usd=profile_volume_usd;
@@ -38,11 +44,11 @@ public class Portfolio {
         return this.id;
     }
 
-    public Coin[] getCoins() {
+    public List<Coin> getCoins() {
         return this.coins;
     }
 
-    public Deal[] getDeals() {
+    public List<Deal> getDeals() {
         return this.deals;
     }
 
@@ -60,5 +66,9 @@ public class Portfolio {
 
     public double[] getProfile_volume_usd() {
         return this.profile_volume_usd;
+    }
+
+    public void setid(Integer id) {
+        this.id=id;
     }
 }
