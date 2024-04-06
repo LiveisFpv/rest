@@ -1,19 +1,47 @@
 package com.project.rest.controllers;
 
+import com.project.rest.models.Coins;
 import com.project.rest.models.Trend;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.project.rest.repository.CoinsRepository;
+import com.project.rest.repository.TrendRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
 
 @RestController
+@RequestMapping("/trends")
 public class TrendsController {
-    @RequestMapping("/trends")
-    public Trend[] greeting() {
-        return new Trend[]{
-                new Trend("Bitcoin",
-                "BTC",
-                23),
-                new Trend("Bitcoin",
-                "BTC",
-                23)};
+
+    @Autowired
+    private TrendRepository trendRepository;
+    @GetMapping
+    public List<Trend> getAllTrend(){
+        return trendRepository.findAll();
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity<Trend> getTrendByID(@PathVariable Integer id){
+        Optional<Trend> trendOptional=trendRepository.findById(id);
+        return trendOptional.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+    @PostMapping
+    public ResponseEntity<Trend> createTrend(@RequestBody Trend trend) {
+        Trend savedCoin = trendRepository.save(trend);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedCoin);
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity<Trend> updateTrend(@PathVariable Integer id,@RequestBody Trend updateTrend){
+        Optional<Trend> trendOptional = trendRepository.findById(id);
+        if(trendOptional.isPresent()){
+            updateTrend.setid(id);
+            Trend savedTrend=trendRepository.save(updateTrend);
+            return ResponseEntity.ok(savedTrend);
+        }
+        else{
+            return ResponseEntity.notFound().build();
+        }
     }
 }

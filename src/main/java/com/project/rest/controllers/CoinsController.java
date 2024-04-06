@@ -1,22 +1,45 @@
 package com.project.rest.controllers;
 
+import com.project.rest.models.Coin;
 import com.project.rest.models.Coins;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import com.project.rest.repository.CoinsRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
 
 @RestController
+@RequestMapping("/coins")
 public class CoinsController {
-    @RequestMapping("/coins")
-    public Coins greeting(@RequestParam(value="Coin", required=false, defaultValue="Bitcoin") String Coin) {
-        return new Coins(Coin,
-                "BTC",
-                50000,
-                -25,
-                -23,
-                56,
-                2000000000,
-                400000000,
-                new double[]{324, 436, 584, 987, 674});
+    @Autowired
+    private CoinsRepository coinsRepository;
+    @GetMapping
+    public List<Coins> getAllCoins(){
+        return coinsRepository.findAll();
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity<Coins> getCoinByID(@PathVariable Integer id){
+        Optional<Coins>coinsOptional=coinsRepository.findById(id);
+        return coinsOptional.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+    @PostMapping
+    public ResponseEntity<Coins> createCoin(@RequestBody Coins coin) {
+        Coins savedCoin = coinsRepository.save(coin);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedCoin);
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity<Coins> updateCoin(@PathVariable Integer id,@RequestBody Coins updateCoin){
+        Optional<Coins> coinsOptional = coinsRepository.findById(id);
+        if(coinsOptional.isPresent()){
+            updateCoin.setid(id);
+            Coins savedCoin=coinsRepository.save(updateCoin);
+            return ResponseEntity.ok(savedCoin);
+        }
+        else{
+            return ResponseEntity.notFound().build();
+        }
     }
 }

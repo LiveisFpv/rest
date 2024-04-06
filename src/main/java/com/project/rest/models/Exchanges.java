@@ -1,9 +1,11 @@
 package com.project.rest.models;
 
 import jakarta.persistence.*;
+import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "Exchanges")
+@NoArgsConstructor(force = true)
+@Table(name = "exchanges")
 public class Exchanges {
     @Id
     @Column(name = "id")
@@ -31,6 +33,10 @@ public class Exchanges {
         this.last_volume=last_volume;
     }
 
+    public Integer getId() {
+        return this.id;
+    }
+
     public double getCoins() {
         return this.coins;
     }
@@ -53,5 +59,9 @@ public class Exchanges {
 
     public String getName() {
         return this.name;
+    }
+
+    public void setid(Integer id) {
+        this.id=id;
     }
 }

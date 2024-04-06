@@ -1,6 +1,6 @@
 BEGIN;
 
-CREATE TABLE IF NOT EXISTS public."Coins"
+CREATE TABLE IF NOT EXISTS public."coins"
 (
     id BIGSERIAL NOT NULL,
     coin_name text NOT NULL,
@@ -9,13 +9,13 @@ CREATE TABLE IF NOT EXISTS public."Coins"
     h1 double precision NOT NULL,
     h24 double precision NOT NULL,
     d7 double precision NOT NULL,
-    market_cup double precision NOT NULL,
+    market_cap double precision NOT NULL,
     volume double precision NOT NULL,
     last_price double precision[] NOT NULL,
-    CONSTRAINT "Coins_pkey" PRIMARY KEY (id,coin_code)
+    CONSTRAINT "coins_pkey" PRIMARY KEY (id)
 );
 
-CREATE TABLE IF NOT EXISTS public."Deal"
+CREATE TABLE IF NOT EXISTS public."deal"
 (
     id BIGSERIAL NOT NULL,
     portfolio_id BIGSERIAL NOT NULL,
@@ -25,10 +25,10 @@ CREATE TABLE IF NOT EXISTS public."Deal"
     volume double precision NOT NULL,
     coin_name text NOT NULL,
     coin_code text NOT NULL,
-    CONSTRAINT "Deal_pkey" PRIMARY KEY (id,portfolio_id)
+    CONSTRAINT "deal_pkey" PRIMARY KEY (id)
 );
 
-CREATE TABLE IF NOT EXISTS public."Coin"
+CREATE TABLE IF NOT EXISTS public."coin"
 (
     id BIGSERIAL NOT NULL,
     portfolio_id BIGSERIAL NOT NULL,
@@ -37,37 +37,37 @@ CREATE TABLE IF NOT EXISTS public."Coin"
     volume double precision NOT NULL,
     usd_price double precision NOT NULL,
     last_price double precision[] NOT NULL,
-    CONSTRAINT "Coin_pkey" PRIMARY KEY (id,portfolio_id)
+    CONSTRAINT "coin_pkey" PRIMARY KEY (id)
 );
 
-CREATE TABLE IF NOT EXISTS public."Trend"
+CREATE TABLE IF NOT EXISTS public."trend"
 (
     id BIGSERIAL NOT NULL,
     coin_name text NOT NULL,
     coin_code text NOT NULL,
     h24 double precision NOT NULL,
-    CONSTRAINT "Trend_pkey" PRIMARY KEY (id,coin_code)
+    CONSTRAINT "trend_pkey" PRIMARY KEY (id)
 );
 
-CREATE TABLE IF NOT EXISTS public."Portfolio"
+CREATE TABLE IF NOT EXISTS public."portfolio"
 (
     id BIGSERIAL NOT NULL,
     profile_volume_usd double precision[] NOT NULL,
     profile_volume_btc double precision[] NOT NULL,
     current_volume_usd double precision NOT NULL,
     current_volume_btc double precision NOT NULL,
-    CONSTRAINT "Portfolio_pkey" PRIMARY KEY (id)
+    CONSTRAINT "portfolio_pkey" PRIMARY KEY (id)
 );
 
-CREATE TABLE IF NOT EXISTS public."Exchanges"
+CREATE TABLE IF NOT EXISTS public."exchanges"
 (
     id BIGSERIAL NOT NULL,
     name text NOT NULL,
     score double precision NOT NULL,
     volume24h double precision NOT NULL,
     markets double precision NOT NULL,
-    "Coins" double precision NOT NULL,
+    "coins" double precision NOT NULL,
     last_volume double precision[] NOT NULL,
-    CONSTRAINT "Exchanges_pkey" PRIMARY KEY (id,name)
+    CONSTRAINT "exchanges_pkey" PRIMARY KEY (id)
 );
 END;

@@ -1,4 +1,4 @@
-INSERT INTO "Portfolio"(
+INSERT INTO "portfolio"(
 	id,profile_volume_usd,profile_volume_btc, current_volume_usd, current_volume_btc) VALUES
 (1,
 ARRAY[324.0,436.0,584.0,987.0,674.0],
@@ -6,8 +6,8 @@ ARRAY[324.0,436.0,584.0,987.0,674.0],
 345,
 345
 );
-INSERT INTO "Coins"(
-	id,coin_name, coin_code, price, h1, h24, d7, market_cup, volume, last_price) VALUES
+INSERT INTO "coins"(
+	id,coin_name, coin_code, price, h1, h24, d7, market_cap, volume, last_price) VALUES
 (1,
 'Bitcoin',
 'BTC',
@@ -19,7 +19,7 @@ INSERT INTO "Coins"(
 400000000,
 ARRAY[324, 436, 584, 987, 674]
 );
-INSERT INTO "Coin"(
+INSERT INTO "coin"(
 	id,portfolio_id, coin_name, coin_code, volume, usd_price, last_price) VALUES
 (1,
 1,
@@ -29,7 +29,7 @@ INSERT INTO "Coin"(
 3289476278.0,
 ARRAY[324, 436, 584, 987, 674]
 );
-INSERT INTO "Deal"(
+INSERT INTO "deal"(
 	id,portfolio_id, date, type, price, volume, coin_name, coin_code) values
 (1,
 1,
@@ -40,8 +40,8 @@ INSERT INTO "Deal"(
 'Bitcoin',
 'BTC'
 );
-INSERT INTO "Exchanges"(
-	id,name, score, volume24h, markets, "Coins", last_volume) VALUES
+INSERT INTO "exchanges"(
+	id,name, score, volume24h, markets, "coins", last_volume) VALUES
 (1,
 'Binance',
 9,
@@ -50,7 +50,7 @@ INSERT INTO "Exchanges"(
 45 ,
 ARRAY[324,436,584,987,674]
 );
-INSERT INTO "Trend"(
+INSERT INTO "trend"(
 	id,coin_name, coin_code, h24) VALUES
 (1,
 'Bitcoin',

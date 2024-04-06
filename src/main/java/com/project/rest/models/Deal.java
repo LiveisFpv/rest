@@ -1,17 +1,19 @@
 package com.project.rest.models;
 
 import jakarta.persistence.*;
+import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "Deal")
+@NoArgsConstructor(force = true)
+@Table(name = "deal")
 public class Deal {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @ManyToOne
-    @JoinColumn(name="Deals_id")
-    private Portfolio Deals;
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="deal_id")
+    private Portfolio deals;
     @Column(name="date")
     private final String date;
     @Column(name="type")
@@ -33,6 +35,13 @@ public class Deal {
         this.coin_code=coin_code;
     }
 
+    public Integer getId() {
+        return this.id;
+    }
+
+    public Portfolio getDeals() {
+        return this.deals;
+    }
     public double getVolume() {
         return this.volume;
     }

@@ -1,9 +1,11 @@
 package com.project.rest.models;
 
 import jakarta.persistence.*;
+import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "Trend")
+@NoArgsConstructor(force = true)
+@Table(name = "trend")
 public class Trend {
     @Id
     @Column(name = "id")
@@ -21,6 +23,10 @@ public class Trend {
         this.h24=h24;
     }
 
+    public Integer getId() {
+        return this.id;
+    }
+
     public String getCoin_name() {
         return this.coin_name;
     }
@@ -31,5 +37,9 @@ public class Trend {
 
     public double getH24() {
         return this.h24;
+    }
+
+    public void setid(Integer id) {
+        this.id=id;
     }
 }

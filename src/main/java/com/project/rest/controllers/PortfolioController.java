@@ -1,14 +1,28 @@
 package com.project.rest.controllers;
 
 import com.project.rest.models.Coin;
+import com.project.rest.models.Coins;
 import com.project.rest.models.Deal;
 import com.project.rest.models.Portfolio;
+import com.project.rest.repository.CoinsRepository;
+import com.project.rest.repository.PortfolioRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
+@RequestMapping(value = "/portfolio")
 public class PortfolioController {
-    @RequestMapping(value = "/portfolio")
+    @Autowired
+    private PortfolioRepository portfolioRepository;
+    @GetMapping
+    public List<Portfolio> getAllPortfolios(){
+        return portfolioRepository.findAll();
+    }
+
     public Portfolio greeting(){
         return new Portfolio(
                 new Coin[]{
