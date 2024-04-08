@@ -34,8 +34,8 @@ public class DealController {
     }
 
     // Добавление новой сделки
-    @PostMapping("/portfolio/{portfilioId}")
-    public ResponseEntity<Deal> createComment(@PathVariable(value = "portfilioId") Integer Id,
+    @PostMapping("/portfolio/{portfolioId}")
+    public ResponseEntity<Deal> createComment(@PathVariable(value = "portfolioId") Integer Id,
                                                  @RequestBody Deal dealRequest) {
         Deal deal = portfolioRepository.findById(Id).map(portfolio -> {
             dealRequest.setPortfolio(portfolio);

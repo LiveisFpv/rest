@@ -33,8 +33,8 @@ public class CoinController {
         Optional<Coin>coinOptional=coinRepository.findById(id);
         return coinOptional.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
-    @PostMapping("/portfolio/{portfilioId}")
-    public ResponseEntity<Coin> addcoin(@PathVariable(value = "portfilioId") Integer Id,
+    @PostMapping("/portfolio/{portfolioId}")
+    public ResponseEntity<Coin> addcoin(@PathVariable(value = "portfolioId") Integer Id,
                                               @RequestBody Coin coinRequest) {
         Coin coin = portfolioRepository.findById(Id).map(portfolio -> {
             coinRequest.setPortfolio(portfolio);

@@ -7,7 +7,9 @@ import com.project.rest.models.Deal;
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @NoArgsConstructor(force = true)
@@ -17,12 +19,10 @@ public class Portfolio {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @JsonManagedReference
-    @OneToMany(mappedBy = "portfolio_coin")
-    private final List<Coin> coins;
-    @JsonManagedReference
-    @OneToMany(mappedBy = "portfolio")
-    private final List<Deal> deals;
+    @OneToMany(mappedBy = "portfolio_coin",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private Set<Coin> coins=new HashSet<>();
+    @OneToMany(mappedBy = "portfolio",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private Set<Deal> deals=new HashSet<>();
     @Column(name = "profile_volume_usd")
     private final double[] profile_volume_usd;
     @Column(name = "profile_volume_btc")
@@ -31,7 +31,7 @@ public class Portfolio {
     private final double current_volume_usd;
     @Column(name = "current_volume_btc")
     private final double current_volume_btc;
-    public Portfolio(List<Coin> coins, List<Deal> deals, double[] profile_volume_usd, double[] profile_volume_btc, double current_volume_usd, double current_volume_btc){
+    public Portfolio(Set<Coin> coins, Set<Deal> deals, double[] profile_volume_usd, double[] profile_volume_btc, double current_volume_usd, double current_volume_btc){
         this.coins=coins;
         this.deals=deals;
         this.profile_volume_usd=profile_volume_usd;
@@ -44,11 +44,11 @@ public class Portfolio {
         return this.id;
     }
 
-    public List<Coin> getCoins() {
+    public Set<Coin> getCoins() {
         return this.coins;
     }
 
-    public List<Deal> getDeals() {
+    public Set<Deal> getDeals() {
         return this.deals;
     }
 
