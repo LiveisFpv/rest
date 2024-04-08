@@ -6,76 +6,76 @@ BEGIN;
 CREATE TABLE IF NOT EXISTS public.coin
 (
     id bigserial NOT NULL,
-    portfolio_coin_id bigint NOT NULL DEFAULT nextval('coin_portfolio_id_seq'::regclass),
-    coin_name text COLLATE pg_catalog."default" NOT NULL,
-    coin_code text COLLATE pg_catalog."default" NOT NULL,
-    volume double precision NOT NULL,
-    usd_price double precision NOT NULL,
-    last_price double precision[] NOT NULL,
+    portfolio_id bigserial,
+    coin_name text COLLATE pg_catalog."default",
+    coin_code text COLLATE pg_catalog."default",
+    volume double precision,
+    usd_price double precision,
+    last_price double precision[],
     CONSTRAINT coin_pkey PRIMARY KEY (id)
 );
 
 CREATE TABLE IF NOT EXISTS public.coins
 (
     id bigserial NOT NULL,
-    coin_name text COLLATE pg_catalog."default" NOT NULL,
-    coin_code text COLLATE pg_catalog."default" NOT NULL,
-    price double precision NOT NULL,
-    h1 double precision NOT NULL,
-    h24 double precision NOT NULL,
-    d7 double precision NOT NULL,
-    market_cap double precision NOT NULL,
-    volume double precision NOT NULL,
-    last_price double precision[] NOT NULL,
+    coin_name text COLLATE pg_catalog."default",
+    coin_code text COLLATE pg_catalog."default",
+    price double precision,
+    h1 double precision,
+    h24 double precision,
+    d7 double precision,
+    market_cap double precision,
+    volume double precision,
+    last_price double precision[],
     CONSTRAINT coins_pkey PRIMARY KEY (id)
 );
 
 CREATE TABLE IF NOT EXISTS public.deal
 (
     id bigserial NOT NULL,
-    portfolio_id bigserial NOT NULL,
-    date text COLLATE pg_catalog."default" NOT NULL,
-    type text COLLATE pg_catalog."default" NOT NULL,
-    price double precision NOT NULL,
-    volume double precision NOT NULL,
-    coin_name text COLLATE pg_catalog."default" NOT NULL,
-    coin_code text COLLATE pg_catalog."default" NOT NULL,
+    portfolio_id bigserial,
+    date text COLLATE pg_catalog."default",
+    type text COLLATE pg_catalog."default",
+    price double precision,
+    volume double precision,
+    coin_name text COLLATE pg_catalog."default",
+    coin_code text COLLATE pg_catalog."default",
     CONSTRAINT deal_pkey PRIMARY KEY (id)
 );
 
 CREATE TABLE IF NOT EXISTS public.exchanges
 (
     id bigserial NOT NULL,
-    name text COLLATE pg_catalog."default" NOT NULL,
-    score double precision NOT NULL,
-    volume24h double precision NOT NULL,
-    markets double precision NOT NULL,
-    coins double precision NOT NULL,
-    last_volume double precision[] NOT NULL,
+    name text COLLATE pg_catalog."default",
+    score double precision,
+    volume24h double precision,
+    markets double precision,
+    coins double precision,
+    last_volume double precision[],
     CONSTRAINT exchanges_pkey PRIMARY KEY (id)
 );
 
 CREATE TABLE IF NOT EXISTS public.portfolio
 (
     id bigserial NOT NULL,
-    profile_volume_usd double precision[] NOT NULL,
-    profile_volume_btc double precision[] NOT NULL,
-    current_volume_usd double precision NOT NULL,
-    current_volume_btc double precision NOT NULL,
+    profile_volume_usd double precision[],
+    profile_volume_btc double precision[],
+    current_volume_usd double precision,
+    current_volume_btc double precision,
     CONSTRAINT portfolio_pkey PRIMARY KEY (id)
 );
 
 CREATE TABLE IF NOT EXISTS public.trend
 (
     id bigserial NOT NULL,
-    coin_name text COLLATE pg_catalog."default" NOT NULL,
-    coin_code text COLLATE pg_catalog."default" NOT NULL,
-    h24 double precision NOT NULL,
+    coin_name text COLLATE pg_catalog."default",
+    coin_code text COLLATE pg_catalog."default",
+    h24 double precision,
     CONSTRAINT trend_pkey PRIMARY KEY (id)
 );
 
 ALTER TABLE IF EXISTS public.coin
-    ADD FOREIGN KEY (portfolio_coin_id)
+    ADD FOREIGN KEY (portfolio_id)
     REFERENCES public.portfolio (id) MATCH SIMPLE
     ON UPDATE NO ACTION
     ON DELETE NO ACTION

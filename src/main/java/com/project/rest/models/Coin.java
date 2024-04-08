@@ -12,10 +12,10 @@ public class Coin {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="portfolio_coin_id")
+    @JoinColumn(name="portfolio_id")
     @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id")
     @JsonIdentityReference(alwaysAsId=true) // Только ID будет сериализован
-    private Portfolio portfolio_coin;
+    private Portfolio portfolio;
     @Column(name="coin_name")
     private final String coin_name;
     @Column(name="coin_code")
@@ -40,14 +40,14 @@ public class Coin {
     }
 
     public Portfolio getPortfolio() {
-        return this.portfolio_coin;
+        return this.portfolio;
     }
 
     public String getCoin_code() {
         return this.coin_code;
     }
     public void setPortfolio(Portfolio portfolio) {
-        this.portfolio_coin = portfolio;
+        this.portfolio = portfolio;
     }
 
     public String getCoin_name() {

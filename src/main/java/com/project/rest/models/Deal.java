@@ -1,11 +1,9 @@
 package com.project.rest.models;
 
 import com.fasterxml.jackson.annotation.*;
-import com.project.rest.repository.PortfolioRepository;
 import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
 
-import java.util.Optional;
 
 @Entity
 @NoArgsConstructor(force = true)

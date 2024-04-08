@@ -19,10 +19,10 @@ public class Portfolio {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @OneToMany(mappedBy = "portfolio_coin",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    private Set<Coin> coins=new HashSet<>();
     @OneToMany(mappedBy = "portfolio",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private Set<Deal> deals=new HashSet<>();
+    @OneToMany(mappedBy = "portfolio",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private Set<Coin> coins=new HashSet<>();
     @Column(name = "profile_volume_usd")
     private final double[] profile_volume_usd;
     @Column(name = "profile_volume_btc")
