@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/trends")
+@RequestMapping("/api/trends")
 public class TrendsController {
 
     @Autowired

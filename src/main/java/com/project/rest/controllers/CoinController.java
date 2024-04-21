@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/coin")
+@RequestMapping("/api/coin")
 public class CoinController {
     @Autowired
     private CoinRepository coinRepository;

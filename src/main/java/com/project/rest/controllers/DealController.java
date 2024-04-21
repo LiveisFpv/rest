@@ -1,8 +1,6 @@
 package com.project.rest.controllers;
 
-import com.project.rest.models.Coins;
 import com.project.rest.models.Deal;
-import com.project.rest.DealRequest;
 import com.project.rest.repository.DealRepository;
 import com.project.rest.repository.PortfolioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/deals")
+@RequestMapping("/api/deals")
 public class DealController {
     @Autowired
     private DealRepository dealRepository;

@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(value = "/portfolio")
+@RequestMapping(value = "/api/portfolio")
 public class PortfolioController {
     @Autowired
     private PortfolioRepository portfolioRepository;

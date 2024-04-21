@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/coins")
+@RequestMapping("/api/coins")
 public class CoinsController {
     @Autowired
     private CoinsRepository coinsRepository;

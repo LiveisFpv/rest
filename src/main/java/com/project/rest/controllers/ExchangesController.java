@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/exchanges")
+@RequestMapping("/api/exchanges")
 public class ExchangesController {
     @Autowired
     private ExchangesRepository exchangesRepository;
