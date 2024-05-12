@@ -73,6 +73,14 @@ CREATE TABLE IF NOT EXISTS public.trend
     h24 double precision,
     CONSTRAINT trend_pkey PRIMARY KEY (id)
 );
+CREATE TABLE IF NOT EXISTS public.price_history
+(
+    id bigserial NOT NULL,
+    time text,
+    status boolean,
+    price double precision,
+    CONSTRAINT price_history_pkey PRIMARY KEY (id)
+);
 
 ALTER TABLE IF EXISTS public.coin
     ADD FOREIGN KEY (portfolio_id)
