@@ -89,7 +89,6 @@ ALTER TABLE IF EXISTS public.coin
     ON DELETE NO ACTION
     NOT VALID;
 
-
 ALTER TABLE IF EXISTS public.deal
     ADD FOREIGN KEY (portfolio_id)
     REFERENCES public.portfolio (id) MATCH SIMPLE
